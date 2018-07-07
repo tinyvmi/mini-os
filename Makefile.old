@@ -142,9 +142,6 @@ APP_LDLIBS += -L$(XEN_ROOT)/stubdom/libxc-$(MINIOS_TARGET_ARCH) -whole-archive -
 LIBS += $(XEN_ROOT)/stubdom/libxc-$(MINIOS_TARGET_ARCH)/libxenctrl.a
 LIBS += $(XEN_ROOT)/stubdom/libxc-$(MINIOS_TARGET_ARCH)/libxenguest.a
 endif
-# APP_LDLIBS += -liconv
-APP_LDLIBS += -ljansson
-APP_LDLIBS += -ljson-c
 APP_LDLIBS += -lpci
 APP_LDLIBS += -lz
 APP_LDLIBS += -lm

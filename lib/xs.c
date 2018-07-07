@@ -22,7 +22,7 @@ struct xs_handle *xs_daemon_open()
 {
     int fd = alloc_fd(FTYPE_XENBUS);
     files[fd].xenbus.events = NULL;
-    printk("xs_daemon_open -> %d, %p\n", fd, &files[fd].xenbus.events);
+    // printk("xs_daemon_open -> %d, %p\n", fd, &files[fd].xenbus.events);
     return (void*)(intptr_t) fd;
 }
 
