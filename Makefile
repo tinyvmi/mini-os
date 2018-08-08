@@ -177,6 +177,9 @@ CONFIG_FILE ?= $(CURDIR)/minios-config.mk
 config:
 	echo "$(DEFINES-y)" >$(CONFIG_FILE)
 
+.PHONY: distclean
+distclean: clean
+
 .PHONY: clean arch_clean
 
 arch_clean:
