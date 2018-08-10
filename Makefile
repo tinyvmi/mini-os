@@ -141,6 +141,24 @@ LIBS += $(XEN_ROOT)/stubdom/libs-$(MINIOS_TARGET_ARCH)/devicemodel/libxendevicem
 APP_LDLIBS += -L$(XEN_ROOT)/stubdom/libxc-$(MINIOS_TARGET_ARCH) -whole-archive -lxenguest -lxenctrl -no-whole-archive
 LIBS += $(XEN_ROOT)/stubdom/libxc-$(MINIOS_TARGET_ARCH)/libxenctrl.a
 LIBS += $(XEN_ROOT)/stubdom/libxc-$(MINIOS_TARGET_ARCH)/libxenguest.a
+
+#############################################
+# LIBs for g++ gcc cross compiled.
+# libgcc
+# todo: the version number should be a var
+APP_LDLIBS += -L$(XEN_ROOT)/stubdom/cross-root-$(MINIOS_TARGET_ARCH)/lib/gcc/$(MINIOS_TARGET_ARCH)-xen-elf/5.4.0 -whole-archive -lgcc -lgcov -no-whole-archive
+LIBS += $(XEN_ROOT)/stubdom/cross-root-$(MINIOS_TARGET_ARCH)/lib/gcc/$(MINIOS_TARGET_ARCH)-xen-elf/5.4.0/libgcc.a
+LIBS += $(XEN_ROOT)/stubdom/cross-root-$(MINIOS_TARGET_ARCH)/lib/gcc/$(MINIOS_TARGET_ARCH)-xen-elf/5.4.0/libgcov.a
+
+# libstdc++ libs
+APP_LDLIBS += -L$(XEN_ROOT)/stubdom/cross-root-$(MINIOS_TARGET_ARCH)/$(MINIOS_TARGET_ARCH)-xen-elf/lib -whole-archive -lstdc++ -lssp_nonshared -no-whole-archive
+LIBS += $(XEN_ROOT)/stubdom/cross-root-$(MINIOS_TARGET_ARCH)/$(MINIOS_TARGET_ARCH)-xen-elf/lib/libstdc++.a
+# LIBS += $(XEN_ROOT)/stubdom/cross-root-$(MINIOS_TARGET_ARCH)/$(MINIOS_TARGET_ARCH)-xen-elf/lib/libssp.a
+LIBS += $(XEN_ROOT)/stubdom/cross-root-$(MINIOS_TARGET_ARCH)/$(MINIOS_TARGET_ARCH)-xen-elf/lib/libssp_nonshared.a
+# LIBS += $(XEN_ROOT)/stubdom/cross-root-$(MINIOS_TARGET_ARCH)/$(MINIOS_TARGET_ARCH)-xen-elf/lib/libsupc++.a
+# LIBS += $(XEN_ROOT)/stubdom/cross-root-$(MINIOS_TARGET_ARCH)/$(MINIOS_TARGET_ARCH)-xen-elf/lib/libquadmath.a
+
+
 endif
 # APP_LDLIBS += -liconv
 APP_LDLIBS += -ljansson
