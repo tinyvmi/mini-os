@@ -21,7 +21,7 @@
 #include <strings.h>
 
 /* newlib defines ffs but not ffsll or ffsl */
-int __ffsti2 (long long int lli)
+int __mini_ffsti2 (long long int lli)
 {
     int i, num, t, tmpint, len;
 
@@ -40,19 +40,19 @@ int __ffsti2 (long long int lli)
     return 0;
 }
 
-int __ffsdi2 (long int li)
+int __mini_ffsdi2 (long int li)
 {
-    return __ffsti2 ((long long int) li);
+    return __mini_ffsti2 ((long long int) li);
 }
 
 int ffsl (long int li)
 {
-    return __ffsti2 ((long long int) li);
+    return __mini_ffsti2 ((long long int) li);
 }
 
 int ffsll (long long int lli)
 {
-    return __ffsti2 (lli);
+    return __mini_ffsti2 (lli);
 }
 
 #if !defined HAVE_LIBC
