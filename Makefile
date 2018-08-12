@@ -142,6 +142,9 @@ APP_LDLIBS += -L$(XEN_ROOT)/stubdom/libxc-$(MINIOS_TARGET_ARCH) -whole-archive -
 LIBS += $(XEN_ROOT)/stubdom/libxc-$(MINIOS_TARGET_ARCH)/libxenctrl.a
 LIBS += $(XEN_ROOT)/stubdom/libxc-$(MINIOS_TARGET_ARCH)/libxenguest.a
 
+endif  # end CONFIG_XC
+
+ifeq ($(CONFIG_GCC),y)
 #############################################
 # LIBs for g++ gcc cross compiled.
 # libgcc
@@ -158,16 +161,24 @@ LIBS += $(XEN_ROOT)/stubdom/cross-root-$(MINIOS_TARGET_ARCH)/$(MINIOS_TARGET_ARC
 # LIBS += $(XEN_ROOT)/stubdom/cross-root-$(MINIOS_TARGET_ARCH)/$(MINIOS_TARGET_ARCH)-xen-elf/lib/libsupc++.a
 # LIBS += $(XEN_ROOT)/stubdom/cross-root-$(MINIOS_TARGET_ARCH)/$(MINIOS_TARGET_ARCH)-xen-elf/lib/libquadmath.a
 
+APP_LDLIBS += -L$(XEN_ROOT)/stubdom/gcc-newlib-patch -whole-archive -lgcc_newlib_patch -no-whole-archive
+LIBS += $(XEN_ROOT)/stubdom/gcc-newlib-patch/libgcc_newlib_patch.a
+endif # end CONFIG_GCC,y
 
+ifeq ($(CONFIG_ICONV),y)
+APP_LDLIBS += -liconv
 endif
-# APP_LDLIBS += -liconv
+
+ifeq ($(CONFIG_JSON),y)
 APP_LDLIBS += -ljansson
 APP_LDLIBS += -ljson-c
+endif
+
 APP_LDLIBS += -lpci
 APP_LDLIBS += -lz
 APP_LDLIBS += -lm
 LDLIBS += -lc
-endif
+endif # end libc=y
 
 ifneq ($(APP_OBJS)-$(lwip),-y)
 OBJS := $(filter-out $(OBJ_DIR)/daytime.o, $(OBJS))
