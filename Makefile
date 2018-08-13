@@ -146,7 +146,7 @@ endif  # end CONFIG_XC
 
 ifeq ($(CONFIG_GCC),y)
 #############################################
-# LIBs for g++ gcc cross compiled.
+# LIBs for g++ gcc cross compiled in stubdom/Makefile.
 # libgcc
 # todo: the version number should be a var
 APP_LDLIBS += -L$(XEN_ROOT)/stubdom/cross-root-$(MINIOS_TARGET_ARCH)/lib/gcc/$(MINIOS_TARGET_ARCH)-xen-elf/5.4.0 -whole-archive -lgcc -lgcov -no-whole-archive
